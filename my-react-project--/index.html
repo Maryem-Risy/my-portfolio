@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Improved Portfolio Sections</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    /* CSS Variables for easier theme management */
+    :root {
+      --primary-purple: #667eea;
+      --primary-blue: #764ba2;
+      --accent-teal: #14b8a6;
+      /* A new accent color */
+      --text-gray-dark: #1e293b;
+      --text-gray-medium: #334155;
+    }
+
+    /* Enhanced gradient animations */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-shift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Enhanced card hover effects */
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-hover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.6s;
+    }
+
+    .card-hover:hover::before {
+      left: 100%;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Glassmorphism effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+
+    /* Enhanced navigation */
+    .nav-item {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-item:hover::after,
+    .nav-item.active::after {
+      width: 100%;
+    }
+
+    /* Enhanced project cards */
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card:hover {
+      transform: translateY(-15px) rotateX(5deg);
+      box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Skills section enhancements */
+    .skill-icon {
+      transition: all 0.3s ease;
+    }
+
+    .skill-icon:hover {
+      transform: scale(1.1) rotate(5deg);
+      color: var(--accent-teal);
+      /* New hover color for icons */
+    }
+
+    /* REVISED Contact section styling */
+    #contact {
+      background: #f8fafc;
+      /* Lighter background, subtle off-white */
+      color: var(--text-gray-dark);
+      /* Darker text for contrast */
+    }
+
+    #contact .contact-card {
+      background: #ffffff;
+      /* White background for cards */
+      border: 1px solid #e2e8f0;
+      /* Subtle border */
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      /* Softer shadow */
+      transition: all 0.3s ease;
+    }
+
+    #contact .contact-card:hover {
+      background: #f0f4f8;
+      /* Light hover background */
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    #contact .contact-card .icon-wrapper {
+      background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+      /* Gradient background for icon circle */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem auto;
+      /* Centered with margin */
+    }
+
+    #contact .contact-card i {
+      color: white !important;
+      /* Ensure icons are white inside the gradient circle */
+    }
+
+    #contact .text-blue-100 {
+      /* Adjust text color for details */
+      color: #64748b;
+      /* Slate 500 for better readability */
+    }
+
+    #contact .main-contact-card {
+      /* Style for the main form card, renamed for clarity */
+      background: #ffffff;
+      /* White background */
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      color: var(--text-gray-dark);
+    }
+
+    #contact .main-contact-card .text-blue-100 {
+      /* Adjust text color inside main form card */
+      color: #64748b;
+    }
+
+    /* Particles background */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(102, 126, 234, 0.3);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Enhanced typography */
+    .enhanced-text {
+      background: linear-gradient(135deg, var(--text-gray-dark), var(--text-gray-medium));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Mobile Menu styles */
+    .mobile-menu {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(25px);
+      z-index: 60;
+      /* Higher than nav */
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 6rem;
+      transition: transform 0.3s ease-out;
+      transform: translateX(100%);
+      /* Start off-screen */
+    }
+
+    .mobile-menu.active {
+      transform: translateX(0);
+      /* Slide in */
+    }
+
+    /* Accessibility: Focus states */
+    a:focus,
+    button:focus {
+      outline: 2px solid var(--accent-teal);
+      outline-offset: 3px;
+      border-radius: 4px;
+      /* Adjust as needed for specific elements */
+    }
+
+    /* Responsive enhancements */
+    @media (max-width: 768px) {
+      .card-hover:hover {
+        transform: translateY(-6px);
+      }
+
+      .project-card:hover {
+        transform: translateY(-8px);
+      }
+
+      .mobile-menu {
+        display: flex;
+        /* Show the container for mobile only */
+      }
+    }
+
+    @keyframes typing {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    @keyframes blink {
+
+      0%,
+      50% {
+        border-color: transparent
+      }
+
+      51%,
+      100% {
+        border-color: #667eea
+      }
+    }
+
+    .typing-animation {
+      overflow: hidden;
+      border-right: 3px solid #667eea;
+      white-space: nowrap;
+      animation: typing 3s steps(40, end), blink 1s infinite;
+    }
+
+    /* Animation de morphing pour le gradient */
+    .morphing-gradient {
+      background: linear-gradient(-45deg, #667eea, #764ba2, #14b8a6, #f093fb);
+      background-size: 400% 400%;
+      animation: gradient-morph 8s ease infinite;
+    }
+
+    @keyframes gradient-morph {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Animation de rotation 3D pour les skills */
+    .skill-card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    .skill-card-3d:hover {
+      transform: rotateY(180deg);
+    }
+
+    .skill-front,
+    .skill-back {
+      backface-visibility: hidden;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .skill-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    /* Animation de wave pour les sections */
+    .wave-animation {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wave-animation::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+      animation: wave 10s linear infinite;
+    }
+
+    @keyframes wave {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Effet de glitch pour le titre */
+    .glitch {
+      position: relative;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      animation: glitch 2s infinite;
+    }
+
+    .glitch::before {
+      animation-delay: 0.1s;
+      color: #ff3366;
+      z-index: -1;
+    }
+
+    .glitch::after {
+      animation-delay: 0.2s;
+      color: #33ff66;
+      z-index: -2;
+    }
+
+    @keyframes glitch {
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: translate(0);
+      }
+
+      20% {
+        opacity: 1;
+        transform: translate(-2px, 2px);
+      }
+
+      40% {
+        opacity: 1;
+        transform: translate(-2px, -2px);
+      }
+
+      60% {
+        opacity: 1;
+        transform: translate(2px, 2px);
+      }
+
+      80% {
+        opacity: 1;
+        transform: translate(2px, -2px);
+      }
+    }
+
+    /* Animation de particules interactives */
+    .interactive-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(102, 126, 234, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: particle-float 3s ease-in-out infinite;
+    }
+
+    @keyframes particle-float {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+      }
+    }
+
+    /* Effet de neon pour les boutons */
+    .neon-button {
+      position: relative;
+      background: transparent;
+      border: 2px solid #667eea;
+      color: #667eea;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .neon-button:hover {
+      background: #667eea;
+      color: white;
+      box-shadow: 0 0 20px #667eea, 0 0 40px #667eea, 0 0 60px #667eea;
+    }
+
+    .neon-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .neon-button:hover::before {
+      left: 100%;
+    }
+
+    /* Animation de code matrix */
+    .matrix-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .matrix-char {
+      position: absolute;
+      color: #00ff41;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      animation: matrix-fall 5s linear infinite;
+    }
+
+    @keyframes matrix-fall {
+      0% {
+        transform: translateY(-100vh);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    /* Effet de hologram pour les projets */
+    .hologram-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+    }
+
+    .hologram-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(0deg,
+          transparent,
+          transparent 2px,
+          rgba(102, 126, 234, 0.1) 2px,
+          rgba(102, 126, 234, 0.1) 4px);
+      animation: hologram-scan 3s linear infinite;
+    }
+
+    @keyframes hologram-scan {
+      0% {
+        transform: translateY(-100%);
+      }
+
+      100% {
+        transform: translateY(100%);
+      }
+    }
+
+    /* Effet de déformation pour les images */
+    .distort-image {
+      transition: all 0.5s ease;
+      filter: contrast(1) brightness(1);
+    }
+
+    .distort-image:hover {
+      transform: scale(1.05);
+      filter: contrast(1.2) brightness(1.1) hue-rotate(10deg);
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+  <div class="particles" id="particles"></div>
+
+  <nav class="fixed top-0 left-0 right-0 glass z-50 border-b border-white/20">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div class="text-2xl font-bold gradient-text">Maryem Risy</div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#about" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">About</a>
+          <a href="#skills" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">Skills</a>
+          <a href="#experience" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">Experience</a>
+          <a href="#projects" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">Projects</a>
+          <a href="#contact" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">Contact</a>
+        </div>
+        <button class="md:hidden glass px-3 py-2 rounded-lg relative z-50" id="mobile-menu-btn"
+          aria-label="Open mobile menu">
+          <i data-lucide="menu" class="h-6 w-6"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="mobile-menu-overlay" class="mobile-menu">
+    <button class="absolute top-6 right-6 glass p-2 rounded-lg" id="close-mobile-menu-btn"
+      aria-label="Close mobile menu">
+      <i data-lucide="x" class="h-6 w-6"></i>
+    </button>
+    <div class="flex flex-col items-center space-y-8 text-xl font-semibold">
+      <a href="#about" class="nav-item text-gray-800 hover:text-purple-600" data-nav-link>About</a>
+      <a href="#skills" class="nav-item text-gray-800 hover:text-purple-600" data-nav-link>Skills</a>
+      <a href="#experience" class="nav-item text-gray-800 hover:text-purple-600" data-nav-link>Experience</a>
+      <a href="#projects" class="nav-item text-gray-800 hover:text-purple-600" data-nav-link>Projects</a>
+      <a href="#contact" class="nav-item text-gray-800 hover:text-purple-600" data-nav-link>Contact</a>
+    </div>
+  </div>
+
+  <section id="hero" class="pt-20 pb-16 px-6 min-h-screen flex items-center wave-animation">
+    <div class="container mx-auto text-center relative z-10">
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <!-- Photo avec effet de distorsion -->
+          <div class="w-56 h-56 mx-auto mb-8 rounded-full overflow-hidden shadow-2xl relative">
+            <div class="absolute inset-0 morphing-gradient opacity-20"></div>
+            <img src="src/images/photo2.jpg" alt="Maryem Risy"
+              class="w-full h-full object-cover relative z-10 distort-image">
+          </div>
+
+          <!-- Nom avec animation de typing et effet glitch -->
+          <h1 class="text-4xl md:text-6xl font-bold mb-8 gradient-text glitch typing-animation" data-text="Maryem Risy">
+            Maryem Risy
+          </h1>
+
+          <!-- Sous-titre avec animation de wave -->
+          <h2 class="text-3xl md:text-4xl text-gray-600 mb-8 enhanced-text">
+            <span class="inline-block animate-bounce">💻</span>
+            Computer Science Engineer | Full-Stack Developer
+            <span class="inline-block animate-bounce" style="animation-delay: 0.1s">🚀</span>
+          </h2>
+
+          <!-- Description avec effet de machine à écrire -->
+          <div class="typing-container">
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+              Passionate Software Engineer specializing in Information Systems and Decision Support,
+              with expertise in web development, mobile applications, and AI solutions.
+            </p>
+          </div>
+        </div>
+
+        <!-- Boutons avec effet néon -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <a href="mailto:maryem.risy@gmail.com"
+            class="neon-button inline-flex items-center px-6 py-3 rounded-full transition-all transform hover:scale-105">
+            <i data-lucide="mail" class="mr-2 h-5 w-5"></i>
+            maryem.risy@gmail.com
+          </a>
+          <a href="tel:+212605613939"
+            class="neon-button inline-flex items-center px-6 py-3 rounded-full transition-all transform hover:scale-105">
+            <i data-lucide="phone" class="mr-2 h-5 w-5"></i>
+            +212 605613939
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fond Matrix -->
+    <div class="matrix-bg" id="matrix-background"></div>
+  </section>
+
+  <section id="skills" class="py-16 px-6 bg-gradient-to-br from-white via-indigo-50 to-purple-50">
+    <div class="container mx-auto">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4 enhanced-text glitch" data-text="Technical Skills">Technical Skills</h2>
+          <div class="w-24 h-1 morphing-gradient mx-auto mb-8 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          <!-- Exemple de carte 3D -->
+          <div class="skill-card-3d relative h-32 perspective-1000">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="code" class="text-purple-600 w-10 h-10 mb-2"></i>
+              <span class="text-sm font-semibold">Frontend</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-sm font-bold">HTML5, CSS3, JavaScript, Bootstrap</span>
+            </div>
+          </div>
+
+          <!-- Répétez pour les autres skills avec différentes couleurs -->
+          <div class="skill-card-3d relative h-32 perspective-1000">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="layers" class="text-blue-600 w-10 h-10 mb-2"></i>
+              <span class="text-sm font-semibold">Backend</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-sm font-bold">PHP, Java, Python, Flutter</span>
+            </div>
+          </div>
+
+          <div class="skill-card-3d relative h-32 perspective-1000">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="brain" class="text-pink-600 w-10 h-10"></i>
+              <span class="text-sm font-semibold">AI & ML</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-sm font-bold">Google ML Kit</span>
+            </div>
+          </div>
+
+          <div class="skill-card-3d relative h-32 perspective-1000">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="database" class="text-orange-600 w-10 h-10"></i>
+              <span class="text-sm font-semibold">Databases & ETL</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-sm font-bold">SQL, PL/SQL, MongoDB, PostgreSQL, Pentaho, Power BI</span>
+            </div>
+          </div>
+          <div class="skill-card-3d relative h-32 perspective-1000">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="git-branch" class="text-gray-800 w-10 h-10"></i>
+              <span class="text-sm font-semibold">Git/GitHub</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-sm font-bold">Git/GitHub</span>
+            </div>
+          </div>
+          <div class="skill-card-3d relative h-32 perspective-1000">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="boxes" class="text-yellow-600 w-10 h-10"></i>
+              <span class="text-sm font-semibold">Frameworks</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-sm font-bold">Laravel, Django, Angular</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mb-16 mt-16">
+      <h2 class="text-4xl font-bold mb-4 enhanced-text">Soft Skills</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="users" class="text-purple-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Travail en équipe </h4>
+      </div>
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="check-circle" class="text-blue-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Discipline </h4>
+      </div>
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="user" class="text-green-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Autonomie </h4>
+      </div>
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="refresh-cw" class="text-orange-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Adaptabilité </h4>
+      </div>
+    </div>
+
+    <div class="text-center mb-16 mt-16">
+      <h2 class="text-4xl font-bold mb-4 enhanced-text">Languages</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="message-square" class="text-purple-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Français: Proficient</h4>
+      </div>
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="message-square" class="text-blue-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Anglais: Proficient </h4>
+      </div>
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="message-square" class="text-green-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Arabe: Native/Bilingual</h4>
+      </div>
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="message-square" class="text-orange-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Espagnol: Basic</h4>
+      </div>
+    </div>
+
+    <div class="text-center mb-16 mt-16">
+      <h2 class="text-4xl font-bold mb-4 enhanced-text">Certifications</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="award" class="text-purple-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Oracle certification en PL/SQL</h4>
+      </div>
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="award" class="text-blue-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Implémentation des bases de données relationnelles avec SQL
+        </h4>
+      </div>
+      <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
+        <div class="skill-icon mb-3">
+          <i data-lucide="award" class="text-green-600 w-10 h-10"></i>
+        </div>
+        <h4 class="font-semibold text-lg">Fonctionnement des algorithmes </h4>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
+
+  <section id="experience" class="py-16 px-6 bg-gradient-to-br from-purple-50 to-blue-50">
+    <div class="container mx-auto">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4 enhanced-text">Professional Experience</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Hands-on experience in developing innovative software solutions
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div class="glass p-8 rounded-2xl card-hover">
+            <h3 class="text-2xl font-bold mb-2 enhanced-text">Stage de fin d'études (PFE)</h3>
+            <p class="text-lg font-medium text-gray-700 mb-2">Centre Hospitalier Universitaire (CHU) de Tanger
+            </p>
+            <p class="text-gray-600 mb-4">February 2025 - August 2025 </p>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Development of a digital solution for the MPR service allowing patients to follow articulation
+                exercises at home via mobile application with movement analysis, and doctors to monitor progress via web
+                interface. </li>
+            </ul>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Django
+              </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PostgreSQL
+              </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Flutter
+              </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Google
+                ML Kit </span>
+            </div>
+          </div>
+
+          <div class="glass p-8 rounded-2xl card-hover">
+            <h3 class="text-2xl font-bold mb-2 enhanced-text">Stage en développement informatique (PFA) </h3>
+            <p class="text-lg font-medium text-gray-700 mb-2">École nationale des sciences appliquées de Tétouan</p>
+            <p class="text-gray-600 mb-4">August 2024 - October 2024 </p>
+            <ul class="list-disc list-inside text-gray-600 space-y-2">
+              <li>Design and development of an exam management application with a user-friendly interface, integrating
+                planning, monitoring, and user authentication functionalities. </li>
+            </ul>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Laravel
+                11 </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PHP
+              </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Bootstrap
+              </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">JavaScript
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="projects" class="py-16 px-6 bg-gradient-to-br from-purple-50 to-blue-50">
+    <div class="container mx-auto">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4 enhanced-text">Featured Projects</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Innovative solutions that showcase technical expertise and creative problem-solving
+          </p>
+        </div>
+
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="glass rounded-3xl overflow-hidden project-card">
+            <div class="relative h-56 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&h=300&fit=crop"
+                alt="Administrative Document Management System" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <a href="#" class="" aria-label="View project details">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </a>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+                Administrative Document Management System
+              </h3>
+              <p class="text-gray-600 mb-6 text-lg">Part of Morocco Digital 2030 vision - comprehensive document
+                management solution. Academic project realized within the framework of the Information Systems
+                Urbanization module, aiming to modernize public services in Morocco. </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Laravel
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">MySQL
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">BPMN
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Proxmox
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass rounded-3xl overflow-hidden project-card">
+            <div class="relative h-56 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=300&fit=crop"
+                alt="Medication Reminder Mobile App" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <a href="#"  aria-label="View project details">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </a>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+                Medication Reminder Mobile App
+              </h3>
+              <p class="text-gray-600 mb-6 text-lg">Smart mobile application with user management and personalized
+                filtering system. The application allows users to create, consult, and delete reminders associated with
+                medications.</p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Android
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Java/Kotlin
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">SQLite
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass rounded-3xl overflow-hidden project-card">
+            <div class="relative h-56 overflow-hidden">
+              <img src="src/images/pfa.png"
+                alt="Medication Reminder Mobile App" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <a href="#"  aria-label="View project details">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </a>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+                PFA
+              </h3>
+              <p class="text-gray-600 mb-6 text-lg">Design and development of an exam management application with a user-friendly interface, integrating
+                planning, monitoring, and user authentication functionalities.</p>
+              <div class="flex flex-wrap gap-2">
+               <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Laravel
+                11 </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PHP
+              </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Bootstrap
+              </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">JavaScript
+              </span>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-3xl overflow-hidden project-card">
+            <div class="relative h-56 overflow-hidden">
+              <img src="src/images/mpr.jpg"
+                alt="Medication Reminder Mobile App" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <a href="#"  aria-label="View project details">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </a>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+                MPR
+              </h3>
+              <p class="text-gray-600 mb-6 text-lg">Development of a digital solution for the MPR service allowing patients to follow articulation
+                exercises at home via mobile application with movement analysis, and doctors to monitor progress via web
+                interface. </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Django
+              </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PostgreSQL
+              </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Flutter
+              </span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Google
+                ML Kit </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass rounded-3xl overflow-hidden project-card">
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src="src/images/kounhany.png"
+                alt="Home Services Booking Web Application" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <a href="#"  aria-label="View project details">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </a>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+                Home Services Booking Web Application
+              </h3>
+              <p class="text-gray-600 mb-6 text-lg">A web application in Laravel to facilitate the search and booking of
+                home services such as babysitting and household maintenance. </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Laravel</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">HTML/CSS</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">JavaScript</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass rounded-3xl overflow-hidden project-card">
+            <div class="relative h-56 overflow-hidden">
+              <img
+                src="src/images/cars_projects.png"
+                alt="Car Rental Management Web Application" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <a href="#" aria-label="View project details">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </a>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+                Car Rental Management Web Application
+              </h3>
+              <p class="text-gray-600 mb-6 text-lg">Development of a car rental management system allowing efficient
+                management of reservations, vehicles, clients, and managers. </p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Django
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">MongoDB
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-16 px-6">
+    <div class="container mx-auto relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 enhanced-text">Let's Work Together</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+        <p class="text-gray-600 mb-12 text-xl max-w-2xl mx-auto">
+          Ready to bring your next project to life? Let's discuss how we can create amazing software solutions together.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="contact-card p-8 rounded-2xl text-center">
+            <div class="icon-wrapper">
+              <i data-lucide="mail" class="w-7 h-7"></i>
+            </div>
+            <h3 class="font-semibold mb-2 text-lg">Email</h3>
+            <p class="text-gray-600">maryem.risy@gmail.com </p>
+          </div>
+
+          <div class="contact-card p-8 rounded-2xl text-center">
+            <div class="icon-wrapper">
+              <i data-lucide="phone" class="w-7 h-7"></i>
+            </div>
+            <h3 class="font-semibold mb-2 text-lg">Phone</h3>
+            <p class="text-gray-600">+212 605613939 </p>
+          </div>
+
+          <div class="contact-card p-8 rounded-2xl text-center">
+            <div class="icon-wrapper">
+              <i data-lucide="map-pin" class="w-7 h-7"></i>
+            </div>
+            <h3 class="font-semibold mb-2 text-lg">Location</h3>
+            <p class="text-gray-600">Casablanca, Morocco </p>
+          </div>
+        </div>
+
+        <div class="rounded-3xl p-12 max-w-2xl mx-auto main-contact-card">
+          <div class="flex items-center justify-center mb-6">
+            <i data-lucide="message-square" class="mr-3 text-purple-600 w-7 h-7"></i>
+            <h3 class="text-2xl font-semibold enhanced-text">Get In Touch</h3>
+          </div>
+          <p class="text-gray-600 mb-8 text-lg">
+            Whether you have a project in mind, need technical consultation, or just want to connect,
+            I'm always open to discussing new opportunities and innovative solutions.
+          </p>
+          <a href="mailto:maryem.risy@gmail.com"
+            class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full hover:from-purple-700 hover:to-blue-700 transition-all transform hover:scale-105 text-lg font-semibold"
+            aria-label="Send Message via Email">
+            <i data-lucide="mail" class="mr-3 h-5 w-5"></i>
+            Send Message
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+    function createMatrixEffect() {
+      const matrixBg = document.getElementById('matrix-background');
+      const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+
+      setInterval(() => {
+        const char = document.createElement('div');
+        char.className = 'matrix-char';
+        char.textContent = chars[Math.floor(Math.random() * chars.length)];
+        char.style.left = Math.random() * 100 + '%';
+        char.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        char.style.opacity = Math.random();
+        matrixBg.appendChild(char);
+
+        setTimeout(() => {
+          char.remove();
+        }, 5000);
+      }, 100);
+    }
+
+    // Fonction pour créer des particules interactives
+    function createInteractiveParticles() {
+      let mouseX = 0, mouseY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Créer une particule à la position de la souris
+        const particle = document.createElement('div');
+        particle.className = 'interactive-particle';
+        particle.style.left = mouseX + 'px';
+        particle.style.top = mouseY + 'px';
+        document.body.appendChild(particle);
+
+        setTimeout(() => {
+          particle.remove();
+        }, 3000);
+      });
+    }
+
+    // Fonction pour l'animation de typing
+    function startTypingAnimation() {
+      const typingElements = document.querySelectorAll('.typing-animation');
+
+      typingElements.forEach(element => {
+        element.style.width = '0';
+        setTimeout(() => {
+          element.style.width = '100%';
+        }, 1000);
+      });
+    }
+
+    // Animation de scroll avec parallax
+    function initParallaxScroll() {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.wave-animation');
+
+        parallaxElements.forEach(element => {
+          const speed = element.dataset.speed || 0.5;
+          element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+      });
+    }
+
+    // Enhanced scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0) rotateX(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+
+
+
+      // Observe elements for animation
+      document.querySelectorAll('.card-hover, .project-card, .contact-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px) rotateX(10deg)';
+        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(el);
+      });
+
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const closeMobileMenuBtn = document.getElementById('close-mobile-menu-btn');
+      const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+      const navLinks = document.querySelectorAll('#mobile-menu-overlay [data-nav-link]');
+
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuOverlay.classList.add('active');
+      });
+
+      closeMobileMenuBtn.addEventListener('click', () => {
+        mobileMenuOverlay.classList.remove('active');
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuOverlay.classList.remove('active'); // Close menu when a link is clicked
+        });
+      });
+
+      // Initialize Lucide icons and log for verification
+      lucide.createIcons();
+      console.log('Lucide icons initialized.'); // Check your browser's console for this message
+    });
+  </script>
+</body>
+
+</html>
