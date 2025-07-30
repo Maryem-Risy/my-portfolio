@@ -25,6 +25,8 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: gradient-shift 3s ease-in-out infinite;
+      font-size: 3.75rem;
+      line-height: 2;
     }
 
     @keyframes gradient-shift {
@@ -286,6 +288,7 @@
     }
 
     /* Responsive enhancements */
+
     @media (max-width: 768px) {
       .card-hover:hover {
         transform: translateY(-6px);
@@ -294,6 +297,7 @@
       .project-card:hover {
         transform: translateY(-8px);
       }
+
 
       .mobile-menu {
         display: flex;
@@ -608,7 +612,7 @@
   <nav class="fixed top-0 left-0 right-0 glass z-50 border-b border-white/20">
     <div class="container mx-auto px-6 py-4">
       <div class="flex justify-between items-center">
-        <div class="text-2xl font-bold gradient-text">Maryem Risy</div>
+        <div class="text-2xl font-bold gradient-text ">Maryem Risy</div>
         <div class="hidden md:flex space-x-8">
           <a href="#about" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">About</a>
           <a href="#skills" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">Skills</a>
@@ -642,26 +646,26 @@
     <div class="container mx-auto text-center relative z-10">
       <div class="max-w-4xl mx-auto">
         <div class="mb-8">
-          <!-- Photo avec effet de distorsion -->
+          <!-- Photo with distortion effect -->
           <div class="w-56 h-56 mx-auto mb-8 rounded-full overflow-hidden shadow-2xl relative">
             <div class="absolute inset-0 morphing-gradient opacity-20"></div>
-            <img src="src/images/photo2.jpg" alt="Maryem Risy"
+            <img src="images/photo2.jpg" alt="Maryem Risy"
               class="w-full h-full object-cover relative z-10 distort-image">
           </div>
 
-          <!-- Nom avec animation de typing et effet glitch -->
+          <!-- Name with typing animation and glitch effect -->
           <h1 class="text-4xl md:text-6xl font-bold mb-8 gradient-text glitch typing-animation" data-text="Maryem Risy">
             Maryem Risy
           </h1>
 
-          <!-- Sous-titre avec animation de wave -->
+          <!-- Subtitle with wave animation -->
           <h2 class="text-3xl md:text-4xl text-gray-600 mb-8 enhanced-text">
             <span class="inline-block animate-bounce">💻</span>
             Computer Science Engineer | Full-Stack Developer
             <span class="inline-block animate-bounce" style="animation-delay: 0.1s">🚀</span>
           </h2>
 
-          <!-- Description avec effet de machine à écrire -->
+          <!-- Description with typewriter effect -->
           <div class="typing-container">
             <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
               Passionate Software Engineer specializing in Information Systems and Decision Support,
@@ -670,7 +674,7 @@
           </div>
         </div>
 
-        <!-- Boutons avec effet néon -->
+        <!-- Buttons with neon effect -->
         <div class="flex flex-wrap justify-center gap-4 mb-12">
           <a href="mailto:maryem.risy@gmail.com"
             class="neon-button inline-flex items-center px-6 py-3 rounded-full transition-all transform hover:scale-105">
@@ -686,7 +690,7 @@
       </div>
     </div>
 
-    <!-- Fond Matrix -->
+    <!-- Matrix Background -->
     <div class="matrix-bg" id="matrix-background"></div>
   </section>
 
@@ -699,7 +703,7 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          <!-- Exemple de carte 3D -->
+          <!-- 3D card example -->
           <div class="skill-card-3d relative h-32 perspective-1000">
             <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
               <i data-lucide="code" class="text-purple-600 w-10 h-10 mb-2"></i>
@@ -710,7 +714,7 @@
             </div>
           </div>
 
-          <!-- Répétez pour les autres skills avec différentes couleurs -->
+          <!-- Repeat for other skills with different colors -->
           <div class="skill-card-3d relative h-32 perspective-1000">
             <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
               <i data-lucide="layers" class="text-blue-600 w-10 h-10 mb-2"></i>
@@ -771,25 +775,25 @@
         <div class="skill-icon mb-3">
           <i data-lucide="users" class="text-purple-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Travail en équipe </h4>
+        <h4 class="font-semibold text-lg">Teamwork</h4>
       </div>
       <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
         <div class="skill-icon mb-3">
           <i data-lucide="check-circle" class="text-blue-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Discipline </h4>
+        <h4 class="font-semibold text-lg">Discipline</h4>
       </div>
       <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
         <div class="skill-icon mb-3">
           <i data-lucide="user" class="text-green-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Autonomie </h4>
+        <h4 class="font-semibold text-lg">Autonomy</h4>
       </div>
       <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
         <div class="skill-icon mb-3">
           <i data-lucide="refresh-cw" class="text-orange-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Adaptabilité </h4>
+        <h4 class="font-semibold text-lg">Adaptability</h4>
       </div>
     </div>
 
@@ -803,25 +807,25 @@
         <div class="skill-icon mb-3">
           <i data-lucide="message-square" class="text-purple-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Français: Proficient</h4>
+        <h4 class="font-semibold text-lg">French: Proficient</h4>
       </div>
       <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
         <div class="skill-icon mb-3">
           <i data-lucide="message-square" class="text-blue-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Anglais: Proficient </h4>
+        <h4 class="font-semibold text-lg">English: Proficient</h4>
       </div>
       <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
         <div class="skill-icon mb-3">
           <i data-lucide="message-square" class="text-green-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Arabe: Native/Bilingual</h4>
+        <h4 class="font-semibold text-lg">Arabic: Native/Bilingual</h4>
       </div>
       <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
         <div class="skill-icon mb-3">
           <i data-lucide="message-square" class="text-orange-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Espagnol: Basic</h4>
+        <h4 class="font-semibold text-lg">Spanish: Basic</h4>
       </div>
     </div>
 
@@ -835,20 +839,19 @@
         <div class="skill-icon mb-3">
           <i data-lucide="award" class="text-purple-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Oracle certification en PL/SQL</h4>
+        <h4 class="font-semibold text-lg">Oracle PL/SQL Certification</h4>
       </div>
       <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
         <div class="skill-icon mb-3">
           <i data-lucide="award" class="text-blue-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Implémentation des bases de données relationnelles avec SQL
-        </h4>
+        <h4 class="font-semibold text-lg">Relational Database Implementation with SQL</h4>
       </div>
       <div class="text-center p-6 glass rounded-2xl card-hover flex flex-col items-center justify-center">
         <div class="skill-icon mb-3">
           <i data-lucide="award" class="text-green-600 w-10 h-10"></i>
         </div>
-        <h4 class="font-semibold text-lg">Fonctionnement des algorithmes </h4>
+        <h4 class="font-semibold text-lg">Algorithm Functionality</h4>
       </div>
     </div>
     </div>
@@ -976,7 +979,7 @@
                 alt="Medication Reminder Mobile App" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div class="absolute bottom-4 right-4">
-                <a href="#"  aria-label="View project details">
+                <a href="#" aria-label="View project details">
                   <i data-lucide="external-link" class="text-white h-5 w-5"></i>
                 </a>
               </div>
@@ -1004,80 +1007,79 @@
 
           <div class="glass rounded-3xl overflow-hidden project-card">
             <div class="relative h-56 overflow-hidden">
-              <img src="src/images/pfa.png"
-                alt="Medication Reminder Mobile App" class="w-full h-full object-cover">
+              <img src="images/pfa.png" alt="Medication Reminder Mobile App" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div class="absolute bottom-4 right-4">
-                <a href="#"  aria-label="View project details">
+                <a href="#" aria-label="View project details">
                   <i data-lucide="external-link" class="text-white h-5 w-5"></i>
                 </a>
               </div>
             </div>
             <div class="p-8">
               <h3 class="text-2xl font-bold mb-3 enhanced-text">
-                PFA
+                Digital Assessment Administration Platform
               </h3>
-              <p class="text-gray-600 mb-6 text-lg">Design and development of an exam management application with a user-friendly interface, integrating
+              <p class="text-gray-600 mb-6 text-lg">Design and development of an exam management application with a
+                user-friendly interface, integrating
                 planning, monitoring, and user authentication functionalities.</p>
               <div class="flex flex-wrap gap-2">
-               <span
-                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Laravel
-                11 </span>
-              <span
-                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PHP
-              </span>
-              <span
-                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Bootstrap
-              </span>
-              <span
-                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">JavaScript
-              </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Laravel
+                  11 </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PHP
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Bootstrap
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">JavaScript
+                </span>
               </div>
             </div>
           </div>
           <div class="glass rounded-3xl overflow-hidden project-card">
             <div class="relative h-56 overflow-hidden">
-              <img src="src/images/mpr.jpg"
-                alt="Medication Reminder Mobile App" class="w-full h-full object-cover">
+              <img src="images/mpr.jpg" alt="Medication Reminder Mobile App" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div class="absolute bottom-4 right-4">
-                <a href="#"  aria-label="View project details">
+                <a href="#" aria-label="View project details">
                   <i data-lucide="external-link" class="text-white h-5 w-5"></i>
                 </a>
               </div>
             </div>
             <div class="p-8">
               <h3 class="text-2xl font-bold mb-3 enhanced-text">
-                MPR
+                Smart Rehabilitation Monitoring Solution
               </h3>
-              <p class="text-gray-600 mb-6 text-lg">Development of a digital solution for the MPR service allowing patients to follow articulation
+              <p class="text-gray-600 mb-6 text-lg">Development of a digital solution for the MPR service allowing
+                patients to follow articulation
                 exercises at home via mobile application with movement analysis, and doctors to monitor progress via web
                 interface. </p>
               <div class="flex flex-wrap gap-2">
                 <span
-                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Django
-              </span>
-              <span
-                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PostgreSQL
-              </span>
-              <span
-                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Flutter
-              </span>
-              <span
-                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Google
-                ML Kit </span>
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Django
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PostgreSQL
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Flutter
+                </span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Google
+                  ML Kit </span>
               </div>
             </div>
           </div>
 
           <div class="glass rounded-3xl overflow-hidden project-card">
             <div class="relative h-56 overflow-hidden">
-              <img
-                src="src/images/kounhany.png"
-                alt="Home Services Booking Web Application" class="w-full h-full object-cover">
+              <img src="images/kounhany.png" alt="Home Services Booking Web Application"
+                class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div class="absolute bottom-4 right-4">
-                <a href="#"  aria-label="View project details">
+                <a href="#" aria-label="View project details">
                   <i data-lucide="external-link" class="text-white h-5 w-5"></i>
                 </a>
               </div>
@@ -1101,9 +1103,8 @@
 
           <div class="glass rounded-3xl overflow-hidden project-card">
             <div class="relative h-56 overflow-hidden">
-              <img
-                src="src/images/cars_projects.png"
-                alt="Car Rental Management Web Application" class="w-full h-full object-cover">
+              <img src="images/cars_projects.png" alt="Car Rental Management Web Application"
+                class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div class="absolute bottom-4 right-4">
                 <a href="#" aria-label="View project details">
