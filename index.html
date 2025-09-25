@@ -6,23 +6,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maryem Risy - Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <style>
-    /* CSS Variables for easier theme management */
     :root {
       --primary-purple: #667eea;
       --primary-blue: #764ba2;
       --accent-teal: #14b8a6;
       --text-gray-dark: #1e293b;
       --text-gray-medium: #334155;
+
+      /* Light mode var */
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --border-color: #e2e8f0;
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --card-shadow: rgba(0, 0, 0, 0.1);
     }
 
-    /* Enhanced gradient animations */
+    /* Dark mode var */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --border-color: #475569;
+        --glass-bg: rgba(30, 41, 59, 0.3);
+        --glass-border: rgba(148, 163, 184, 0.2);
+        --card-shadow: rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --border-color: #475569;
+      --glass-bg: rgba(30, 41, 59, 0.3);
+      --glass-border: rgba(148, 163, 184, 0.2);
+      --card-shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Enhanced gradient animations - dark mode compatible */
     .gradient-text {
       background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-blue) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+
+    /* Dark mode compatible hero title */
+    .hero-title {
+      color: var(--text-primary);
+    }
+
+    /* Section titles - dark mode compatible */
+    .section-title {
+      color: var(--text-primary);
+    }
+
+    /* Enhanced text - dark mode compatible */
+    .enhanced-text {
+      color: var(--text-primary);
     }
 
     .md\:text-6xl {
@@ -32,6 +91,10 @@
 
     /* Enhanced card hover effects */
     .card-hover {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
@@ -54,21 +117,26 @@
 
     .card-hover:hover {
       transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 20px 40px -12px var(--card-shadow);
     }
 
-    /* Glassmorphism effect */
+    /* Glassmorphism effect - theme aware */
     .glass {
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--glass-bg);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow);
     }
 
     /* Enhanced navigation */
     .nav-item {
       position: relative;
       transition: all 0.3s ease;
+      color: var(--text-secondary);
+    }
+
+    .nav-item:hover {
+      color: var(--primary-purple);
     }
 
     .nav-item::after {
@@ -90,6 +158,10 @@
 
     /* Enhanced project cards */
     .project-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow);
       position: relative;
       overflow: hidden;
       border-radius: 20px;
@@ -115,7 +187,7 @@
 
     .project-card:hover {
       transform: translateY(-12px);
-      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 30px 60px -20px var(--card-shadow);
     }
 
     /* Skills section enhancements */
@@ -128,23 +200,23 @@
       color: var(--accent-teal);
     }
 
-    /* Contact section styling */
+    /* Contact section styling - dark mode compatible */
     #contact {
-      background: #f8fafc;
-      color: var(--text-gray-dark);
+      background: var(--bg-primary);
+      color: var(--text-primary);
     }
 
     #contact .contact-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow);
       transition: all 0.3s ease;
     }
 
     #contact .contact-card:hover {
-      background: #f0f4f8;
       transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 15px 30px var(--card-shadow);
     }
 
     #contact .contact-card .icon-wrapper {
@@ -162,19 +234,24 @@
       color: white !important;
     }
 
-    #contact .text-blue-100 {
-      color: #64748b;
+    #contact .contact-card h3 {
+      color: var(--text-primary);
+    }
+
+    #contact .contact-card p {
+      color: var(--text-secondary);
     }
 
     #contact .main-contact-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-      color: var(--text-gray-dark);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow);
+      color: var(--text-primary);
     }
 
-    #contact .main-contact-card .text-blue-100 {
-      color: #64748b;
+    #contact .main-contact-card p {
+      color: var(--text-secondary);
     }
 
     /* Particles background */
@@ -217,15 +294,7 @@
       }
     }
 
-    /* Enhanced typography */
-    .enhanced-text {
-      background: linear-gradient(135deg, var(--text-gray-dark), var(--text-gray-medium));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* Mobile Menu styles */
+    /* Mobile Menu styles - dark mode compatible */
     .mobile-menu {
       display: none;
       position: fixed;
@@ -233,7 +302,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.9);
+      background: var(--glass-bg);
       backdrop-filter: blur(25px);
       z-index: 60;
       flex-direction: column;
@@ -248,6 +317,40 @@
       transform: translateX(0);
     }
 
+    .mobile-menu a {
+      color: var(--text-primary);
+    }
+
+    /* Hero section background - theme aware */
+    #hero {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-tertiary) 100%);
+    }
+
+    /* Skills section background - theme aware */
+    #skills {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    }
+
+    /* Experience section background - theme aware */
+    #experience {
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+    }
+
+    /* Projects section background - theme aware */
+    #projects {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    }
+
+    /* subtitle - dark mode compatible */
+    .professional-subtitle {
+      color: var(--text-secondary);
+    }
+
+    /* Description text - dark mode compatible */
+    .description-text {
+      color: var(--text-secondary);
+    }
+
     /* Accessibility: Focus states */
     a:focus,
     button:focus {
@@ -256,7 +359,7 @@
       border-radius: 4px;
     }
 
-    /* Responsive enhancements */
+    /* Responsive */
     @media (max-width: 768px) {
       .card-hover:hover {
         transform: translateY(-6px);
@@ -292,7 +395,7 @@
       }
     }
 
-    /* 3D skill cards */
+    /* 3D skill cards - dark mode compatible */
     .skill-card-3d {
       transform-style: preserve-3d;
       transition: transform 0.6s;
@@ -316,6 +419,10 @@
       justify-content: center;
       flex-direction: column;
       border-radius: 16px;
+    }
+
+    .skill-front {
+      color: var(--text-primary);
     }
 
     .skill-back {
@@ -351,7 +458,7 @@
       }
     }
 
-    /* Clean button styling */
+    /* button styling */
     .clean-button {
       position: relative;
       background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
@@ -383,7 +490,7 @@
       left: 100%;
     }
 
-    /* Image effects */
+    /* Img effects */
     .profile-image {
       transition: all 0.5s ease;
       filter: contrast(1) brightness(1);
@@ -394,7 +501,7 @@
       filter: contrast(1.2) brightness(1.1);
     }
 
-    /* Fade in animation */
+    /* Fade */
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -419,22 +526,79 @@
         transform: translateY(0);
       }
     }
+
+    /* Dark mode button */
+    .theme-toggle {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 10px 20px var(--card-shadow);
+    }
+
+    .theme-toggle i {
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    /* Project card content - dark mode compatible */
+    .project-card h3 {
+      color: var(--text-primary);
+    }
+
+    .project-card p {
+      color: var(--text-secondary);
+    }
+
+    /* Experience card content - dark mode compatible */
+    .experience-card h3 {
+      color: var(--text-primary);
+    }
+
+    .experience-card p {
+      color: var(--text-secondary);
+    }
+
+    .experience-card ul li {
+      color: var(--text-secondary);
+    }
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+<body>
   <div class="particles" id="particles"></div>
+
+  <!-- Theme Button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <i data-lucide="moon" id="theme-icon"></i>
+  </button>
 
   <nav class="fixed top-0 left-0 right-0 glass z-50 border-b border-white/20">
     <div class="container mx-auto px-6 py-4">
       <div class="flex justify-between items-center">
         <div class="text-2xl font-bold gradient-text">Maryem Risy</div>
         <div class="hidden md:flex space-x-8">
-          <a href="#about" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">About</a>
-          <a href="#skills" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">Skills</a>
-          <a href="#experience" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">Experience</a>
-          <a href="#projects" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">Projects</a>
-          <a href="#contact" class="nav-item text-sm font-medium text-gray-700 hover:text-purple-600">Contact</a>
+          <a href="#about" class="nav-item text-sm font-medium">About</a>
+          <a href="#skills" class="nav-item text-sm font-medium">Skills</a>
+          <a href="#experience" class="nav-item text-sm font-medium">Experience</a>
+          <a href="#projects" class="nav-item text-sm font-medium">Projects</a>
+          <a href="#contact" class="nav-item text-sm font-medium">Contact</a>
         </div>
         <button class="md:hidden glass px-3 py-2 rounded-lg relative z-50" id="mobile-menu-btn"
           aria-label="Open mobile menu">
@@ -450,11 +614,11 @@
       <i data-lucide="x" class="h-6 w-6"></i>
     </button>
     <div class="flex flex-col items-center space-y-8 text-xl font-semibold">
-      <a href="#about" class="nav-item text-gray-800 hover:text-purple-600" data-nav-link>About</a>
-      <a href="#skills" class="nav-item text-gray-800 hover:text-purple-600" data-nav-link>Skills</a>
-      <a href="#experience" class="nav-item text-gray-800 hover:text-purple-600" data-nav-link>Experience</a>
-      <a href="#projects" class="nav-item text-gray-800 hover:text-purple-600" data-nav-link>Projects</a>
-      <a href="#contact" class="nav-item text-gray-800 hover:text-purple-600" data-nav-link>Contact</a>
+      <a href="#about" class="nav-item" data-nav-link>About</a>
+      <a href="#skills" class="nav-item" data-nav-link>Skills</a>
+      <a href="#experience" class="nav-item" data-nav-link>Experience</a>
+      <a href="#projects" class="nav-item" data-nav-link>Projects</a>
+      <a href="#contact" class="nav-item" data-nav-link>Contact</a>
     </div>
   </div>
 
@@ -462,31 +626,24 @@
     <div class="container mx-auto text-center relative z-10">
       <div class="max-w-4xl mx-auto">
         <div class="mb-8">
-          <!-- Clean profile photo -->
           <div class="w-56 h-56 mx-auto mb-8 rounded-full overflow-hidden shadow-2xl relative fade-in">
             <div class="absolute inset-0 morphing-gradient opacity-20"></div>
             <img src="images/photo2.jpg" alt="Maryem Risy"
               class="w-full h-full object-cover relative z-10 profile-image">
           </div>
-
-          <!-- Clean name presentation -->
-          <h1 class="text-4xl md:text-6xl font-bold mb-6  fade-in fade-in-delay-1">
+          <h1 class="text-4xl md:text-6xl font-bold mb-6 hero-title fade-in fade-in-delay-1">
             Maryem Risy
           </h1>
-
-          <!-- Professional subtitle -->
-          <h2 class="text-2xl md:text-3xl text-gray-600 mb-8 enhanced-text fade-in fade-in-delay-2">
+          <h2 class="text-2xl md:text-3xl professional-subtitle mb-8 fade-in fade-in-delay-2">
             Computer Science Engineer | Full-Stack Developer
           </h2>
-
-          <!-- Clean description -->
-          <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed fade-in fade-in-delay-3">
+          <p class="text-xl description-text mb-12 max-w-3xl mx-auto leading-relaxed fade-in fade-in-delay-3">
             Passionate Software Engineer specializing in Information Systems and Decision Support,
             with expertise in web development, mobile applications, and AI solutions.
           </p>
         </div>
 
-        <!-- Professional contact buttons -->
+        <!-- contact buttons -->
         <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in fade-in-delay-3">
           <a href="mailto:maryem.risy@gmail.com"
             class="clean-button inline-flex items-center px-6 py-3 rounded-full transition-all transform hover:scale-105">
@@ -506,10 +663,18 @@
           <a href="https://www.linkedin.com/in/maryem-risy-6710aa219/" target="_blank"
             class="clean-button inline-flex items-center px-6 py-3 rounded-full transition-all transform hover:scale-105">
             <i data-lucide="linkedin" class="mr-2 h-5 w-5"></i>
-           Connect
+            Connect
           </a>
 
 
+        </div>
+        <!-- Download CV Button -->
+        <div class="flex justify-center mt-8 fade-in fade-in-delay-3">
+          <a href="cv/Maryem_Risy_CV.pdf" download="Maryem_Risy_CV.pdf"
+            class="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold px-8 py-4 rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center">
+            <i data-lucide="download" class="mr-3 h-6 w-6"></i>
+            My resume
+          </a>
         </div>
 
 
@@ -517,11 +682,11 @@
     </div>
   </section>
 
-  <section id="skills" class="py-16 px-6 bg-gradient-to-br from-white via-indigo-50 to-purple-50">
+  <section id="skills" class="py-16 px-6">
     <div class="container mx-auto">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold mb-4 ">Technical Skills</h2>
+          <h2 class="text-4xl font-bold mb-4 section-title">Technical Skills</h2>
           <div class="w-24 h-1 morphing-gradient mx-auto mb-8 rounded-full"></div>
         </div>
 
@@ -589,7 +754,7 @@
 
         <!-- Soft Skills Section -->
         <div class="text-center mb-16 mt-16">
-          <h2 class="text-4xl font-bold mb-4">Soft Skills</h2>
+          <h2 class="text-4xl font-bold mb-4 section-title">Soft Skills</h2>
           <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
         </div>
 
@@ -598,31 +763,31 @@
             <div class="skill-icon mb-3">
               <i data-lucide="users" class="text-purple-600 w-10 h-10"></i>
             </div>
-            <h4 class="font-semibold text-lg">Teamwork</h4>
+            <h4 class="font-semibold text-lg enhanced-text">Teamwork</h4>
           </div>
           <div class="text-center p-6 glass rounded-2xl card-hover">
             <div class="skill-icon mb-3">
               <i data-lucide="check-circle" class="text-blue-600 w-10 h-10"></i>
             </div>
-            <h4 class="font-semibold text-lg">Discipline</h4>
+            <h4 class="font-semibold text-lg enhanced-text">Discipline</h4>
           </div>
           <div class="text-center p-6 glass rounded-2xl card-hover">
             <div class="skill-icon mb-3">
               <i data-lucide="user" class="text-green-600 w-10 h-10"></i>
             </div>
-            <h4 class="font-semibold text-lg">Autonomy</h4>
+            <h4 class="font-semibold text-lg enhanced-text">Autonomy</h4>
           </div>
           <div class="text-center p-6 glass rounded-2xl card-hover">
             <div class="skill-icon mb-3">
               <i data-lucide="refresh-cw" class="text-orange-600 w-10 h-10"></i>
             </div>
-            <h4 class="font-semibold text-lg">Adaptability</h4>
+            <h4 class="font-semibold text-lg enhanced-text">Adaptability</h4>
           </div>
         </div>
 
         <!-- Languages Section -->
         <div class="text-center mb-16 mt-16">
-          <h2 class="text-4xl font-bold mb-4">Languages</h2>
+          <h2 class="text-4xl font-bold mb-4 section-title">Languages</h2>
           <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
         </div>
 
@@ -655,7 +820,7 @@
 
         <!-- Certifications Section -->
         <div class="text-center mb-16 mt-16">
-          <h2 class="text-4xl font-bold mb-4">Certifications</h2>
+          <h2 class="text-4xl font-bold mb-4 section-title">Certifications</h2>
           <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
         </div>
 
@@ -687,19 +852,19 @@
     <div class="container mx-auto">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold mb-4">Professional Experience</h2>
+          <h2 class="text-4xl font-bold mb-4 section-title">Professional Experience</h2>
           <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p class="text-xl description-text max-w-2xl mx-auto">
             Hands-on experience in developing innovative software solutions
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div class="glass p-8 rounded-2xl card-hover">
-            <h3 class="text-2xl font-bold mb-2 enhanced-text">End of Studies Internship (PFE)</h3>
-            <p class="text-lg font-medium text-gray-700 mb-2">University Hospital Center (CHU) of Tangier</p>
-            <p class="text-gray-600 mb-4">February 2025 - August 2025</p>
-            <ul class="list-disc list-inside text-gray-600 space-y-2">
+            <h3 class="text-2xl font-bold mb-3">End of Studies Internship (PFE)</h3>
+            <p class="text-lg font-medium enhanced-text mb-2">University Hospital Center (CHU) of Tangier</p>
+            <p class="description-text mb-4">February 2025 - August 2025</p>
+            <ul class="mb-6 text-lg">
               <li>Development of a digital solution for the MPR service allowing patients to follow articulation
                 exercises at home via mobile application with movement analysis, and doctors to monitor progress via web
                 interface.</li>
@@ -718,10 +883,10 @@
           </div>
 
           <div class="glass p-8 rounded-2xl card-hover">
-            <h3 class="text-2xl font-bold mb-2 enhanced-text">Development Internship (PFA)</h3>
-            <p class="text-lg font-medium text-gray-700 mb-2">National School of Applied Sciences of Tetouan</p>
-            <p class="text-gray-600 mb-4">August 2024 - October 2024</p>
-            <ul class="list-disc list-inside text-gray-600 space-y-2">
+            <h3 class="text-2xl font-bold mb-3">Development Internship (PFA)</h3>
+            <p class="text-lg font-medium enhanced-text mb-2">National School of Applied Sciences of Tetouan</p>
+            <p class="description-text mb-4">August 2024 - October 2024</p>
+            <ul class="mb-6 text-lg">
               <li>Design and development of an exam management application with a user-friendly interface, integrating
                 planning, monitoring, and user authentication functionalities.</li>
             </ul>
@@ -742,19 +907,19 @@
     </div>
   </section>
 
-  <section id="projects" class="py-16 px-6 bg-gradient-to-br from-white via-indigo-50 to-purple-50">
+  <section id="projects" class="py-16 px-6">
     <div class="container mx-auto">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold mb-4">Featured Projects</h2>
+          <h2 class="text-4xl font-bold mb-4 section-title">Featured Projects</h2>
           <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p class="text-xl description-text max-w-2xl mx-auto">
             Innovative solutions that showcase technical expertise and creative problem-solving
           </p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8">
-          <div class="glass rounded-3xl overflow-hidden project-card">
+          <div class="project-card rounded-3xl overflow-hidden">
             <div class="relative h-56 overflow-hidden">
               <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&h=300&fit=crop"
                 alt="Administrative Document Management System" class="w-full h-full object-cover">
@@ -766,10 +931,10 @@
               </div>
             </div>
             <div class="p-8">
-              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+              <h3 class="text-2xl font-bold mb-3">
                 Administrative Document Management System
               </h3>
-              <p class="text-gray-600 mb-6 text-lg">Part of Morocco Digital 2030 vision - comprehensive document
+              <p class="mb-6 text-lg">Part of Morocco Digital 2030 vision - comprehensive document
                 management solution. Academic project realized within the framework of the Information Systems
                 Urbanization module, aiming to modernize public services in Morocco.</p>
               <div class="flex flex-wrap gap-2">
@@ -785,22 +950,22 @@
             </div>
           </div>
 
-          <div class="glass rounded-3xl overflow-hidden project-card">
+          <div class="project-card rounded-3xl overflow-hidden">
             <div class="relative h-56 overflow-hidden">
               <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=300&fit=crop"
                 alt="Medication Reminder Mobile App" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div class="absolute bottom-4 right-4">
-                <a href="#" aria-label="View project details">
-                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                <a href="https://github.com/Maryem-Risy/" target="_blank" rel="noopener noreferrer" class="glass p-3 rounded-lg hover:bg-white/30 transition-colors bg-purple-600/20" aria-label="View GitHub profile" onclick="console.log('Link clicked!')">
+                  <i data-lucide="external-link" class="text-white h-6 w-6"></i>
                 </a>
               </div>
             </div>
             <div class="p-8">
-              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+              <h3 class="text-2xl font-bold mb-3">
                 Medication Reminder Mobile App
               </h3>
-              <p class="text-gray-600 mb-6 text-lg">Smart mobile application with user management and personalized
+              <p class="mb-6 text-lg">Smart mobile application with user management and personalized
                 filtering system. The application allows users to create, consult, and delete reminders associated with
                 medications.</p>
               <div class="flex flex-wrap gap-2">
@@ -814,7 +979,7 @@
             </div>
           </div>
 
-          <div class="glass rounded-3xl overflow-hidden project-card">
+          <div class="project-card rounded-3xl overflow-hidden">
             <div class="relative h-56 overflow-hidden">
               <img src="images/pfa.png" alt="Digital Assessment Administration Platform"
                 class="w-full h-full object-cover">
@@ -826,10 +991,10 @@
               </div>
             </div>
             <div class="p-8">
-              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+              <h3 class="text-2xl font-bold mb-3">
                 Digital Assessment Administration Platform
               </h3>
-              <p class="text-gray-600 mb-6 text-lg">Design and development of an exam management application with a
+              <p class="mb-6 text-lg">Design and development of an exam management application with a
                 user-friendly interface, integrating planning, monitoring, and user authentication functionalities.</p>
               <div class="flex flex-wrap gap-2">
                 <span
@@ -845,7 +1010,7 @@
             </div>
           </div>
 
-          <div class="glass rounded-3xl overflow-hidden project-card">
+          <div class="project-card rounded-3xl overflow-hidden">
             <div class="relative h-56 overflow-hidden">
               <img src="images/mpr.jpg" alt="Smart Rehabilitation Monitoring Solution"
                 class="w-full h-full object-cover">
@@ -857,10 +1022,10 @@
               </div>
             </div>
             <div class="p-8">
-              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+              <h3 class="text-2xl font-bold mb-3">
                 Smart Rehabilitation Monitoring Solution
               </h3>
-              <p class="text-gray-600 mb-6 text-lg">Development of a digital solution for the MPR service allowing
+              <p class="mb-6 text-lg">Development of a digital solution for the MPR service allowing
                 patients to follow articulation exercises at home via mobile application with movement analysis, and
                 doctors to monitor progress via web interface.</p>
               <div class="flex flex-wrap gap-2">
@@ -877,7 +1042,7 @@
             </div>
           </div>
 
-          <div class="glass rounded-3xl overflow-hidden project-card">
+          <div class="project-card rounded-3xl overflow-hidden">
             <div class="relative h-56 overflow-hidden">
               <img src="images/kounhany.png" alt="Home Services Booking Web Application"
                 class="w-full h-full object-cover">
@@ -889,10 +1054,10 @@
               </div>
             </div>
             <div class="p-8">
-              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+              <h3 class="text-2xl font-bold mb-3">
                 Home Services Booking Web Application
               </h3>
-              <p class="text-gray-600 mb-6 text-lg">A web application in Laravel to facilitate the search and booking of
+              <p class="mb-6 text-lg">A web application in Laravel to facilitate the search and booking of
                 home services such as babysitting and household maintenance.</p>
               <div class="flex flex-wrap gap-2">
                 <span
@@ -905,7 +1070,7 @@
             </div>
           </div>
 
-          <div class="glass rounded-3xl overflow-hidden project-card">
+          <div class="project-card rounded-3xl overflow-hidden">
             <div class="relative h-56 overflow-hidden">
               <img src="images/cars_projects.png" alt="Car Rental Management Web Application"
                 class="w-full h-full object-cover">
@@ -919,10 +1084,10 @@
               </div>
             </div>
             <div class="p-8">
-              <h3 class="text-2xl font-bold mb-3 enhanced-text">
+              <h3 class="text-2xl font-bold mb-3">
                 Car Rental Management Web Application
               </h3>
-              <p class="text-gray-600 mb-6 text-lg">Development of a car rental management system allowing efficient
+              <p class="mb-6 text-lg">Development of a car rental management system allowing efficient
                 management of reservations, vehicles, clients, and managers.</p>
               <div class="flex flex-wrap gap-2">
                 <span
@@ -940,9 +1105,9 @@
   <section id="contact" class="py-16 px-6">
     <div class="container mx-auto relative z-10">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Work Together</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 section-title">Let's Work Together</h2>
         <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
-        <p class="text-gray-600 mb-12 text-xl max-w-2xl mx-auto">
+        <p class="description-text mb-12 text-xl max-w-2xl mx-auto">
           Ready to bring your next project to life? Let's discuss how we can create amazing software solutions together.
         </p>
 
@@ -952,7 +1117,7 @@
               <i data-lucide="mail" class="w-7 h-7"></i>
             </div>
             <h3 class="font-semibold mb-2 text-lg">Email</h3>
-            <p class="text-gray-600">maryem.risy@gmail.com</p>
+            <p>maryem.risy@gmail.com</p>
           </div>
 
           <div class="contact-card p-8 rounded-2xl text-center">
@@ -960,7 +1125,7 @@
               <i data-lucide="phone" class="w-7 h-7"></i>
             </div>
             <h3 class="font-semibold mb-2 text-lg">Phone</h3>
-            <p class="text-gray-600">+212 605613939</p>
+            <p>+212 605613939</p>
           </div>
 
           <div class="contact-card p-8 rounded-2xl text-center">
@@ -968,16 +1133,16 @@
               <i data-lucide="map-pin" class="w-7 h-7"></i>
             </div>
             <h3 class="font-semibold mb-2 text-lg">Location</h3>
-            <p class="text-gray-600">Casablanca, Morocco</p>
+            <p>Casablanca, Morocco</p>
           </div>
         </div>
 
         <div class="rounded-3xl p-12 max-w-2xl mx-auto main-contact-card">
           <div class="flex items-center justify-center mb-6">
             <i data-lucide="message-square" class="mr-3 text-purple-600 w-7 h-7"></i>
-            <h3 class="text-2xl font-semibold enhanced-text">Get In Touch</h3>
+            <h3 class="text-2xl font-semibold">Get In Touch</h3>
           </div>
-          <p class="text-gray-600 mb-8 text-lg">
+          <p class="mb-8 text-lg">
             Whether you have a project in mind, need technical consultation, or just want to connect,
             I'm always open to discussing new opportunities and innovative solutions.
           </p>
@@ -993,7 +1158,48 @@
   </section>
 
   <script>
-    // Create floating particles
+    // Theme management
+    function initTheme() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const body = document.body;
+
+      // Check default to 'light' mode
+      const currentTheme = localStorage.getItem('theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+      // Apply the theme
+      if (currentTheme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        themeIcon.setAttribute('data-lucide', 'sun');
+      } else {
+        body.removeAttribute('data-theme');
+        themeIcon.setAttribute('data-lucide', 'moon');
+      }
+
+      // Re-initialize icons after change
+      lucide.createIcons();
+
+      // Theme toggle functionality
+      themeToggle?.addEventListener('click', () => {
+        const isDark = body.hasAttribute('data-theme');
+        
+        if (isDark) {
+          body.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
+          themeIcon.setAttribute('data-lucide', 'moon');
+        } else {
+          body.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+          themeIcon.setAttribute('data-lucide', 'sun');
+        }
+        
+        // Re-initialize icons change
+        lucide.createIcons();
+      });
+    }
+
+    // floating particles
     function createParticles() {
       const particlesContainer = document.getElementById('particles');
       const particleCount = 30;
@@ -1008,7 +1214,7 @@
       }
     }
 
-    // Enhanced scroll animations
+    // scroll animations
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -1025,9 +1231,10 @@
 
     // Initialize on load
     document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
       createParticles();
 
-      // Observe elements for animation
+      //  elts for animation
       document.querySelectorAll('.card-hover, .project-card, .contact-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -1055,7 +1262,7 @@
         });
       });
 
-      // Smooth scrolling for navigation links
+      // Smooth scrolling for links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
@@ -1069,10 +1276,9 @@
         });
       });
 
-      // Initialize Lucide icons
+      // Initialize icons
       lucide.createIcons();
     });
   </script>
 </body>
-
 </html>
