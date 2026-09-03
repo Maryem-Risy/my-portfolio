@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maryem Risy - Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    :root {
+      --primary-purple: #667eea;
+      --primary-blue: #764ba2;
+      --accent-teal: #14b8a6;
+      --text-gray-dark: #1e293b;
+      --text-gray-medium: #334155;
+
+      /* Light mode var */
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --border-color: #e2e8f0;
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --card-shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Dark mode var */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --border-color: #475569;
+        --glass-bg: rgba(30, 41, 59, 0.3);
+        --glass-border: rgba(148, 163, 184, 0.2);
+        --card-shadow: rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --border-color: #475569;
+      --glass-bg: rgba(30, 41, 59, 0.3);
+      --glass-border: rgba(148, 163, 184, 0.2);
+      --card-shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Enhanced gradient animations - dark mode compatible */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Dark mode compatible hero title */
+    .hero-title {
+      color: var(--text-primary);
+    }
+
+    /* Section titles - dark mode compatible */
+    .section-title {
+      color: var(--text-primary);
+    }
+
+    /* Enhanced text - dark mode compatible */
+    .enhanced-text {
+      color: var(--text-primary);
+    }
+
+    .md\:text-6xl {
+      font-size: 3.75rem;
+      line-height: 1.1;
+    }
+
+    /* Enhanced card hover effects */
+    .card-hover {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-hover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.6s;
+    }
+
+    .card-hover:hover::before {
+      left: 100%;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px -12px var(--card-shadow);
+    }
+
+    /* Glassmorphism effect - theme aware */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow);
+    }
+
+    /* Enhanced navigation */
+    .nav-item {
+      position: relative;
+      transition: all 0.3s ease;
+      color: var(--text-secondary);
+    }
+
+    .nav-item:hover {
+      color: var(--primary-purple);
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-item:hover::after,
+    .nav-item.active::after {
+      width: 100%;
+    }
+
+    /* Enhanced project cards */
+    .project-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 60px -20px var(--card-shadow);
+    }
+
+    /* Skills section enhancements */
+    .skill-icon {
+      transition: all 0.3s ease;
+    }
+
+    .skill-icon:hover {
+      transform: scale(1.1) rotate(5deg);
+      color: var(--accent-teal);
+    }
+
+    /* Contact section styling - dark mode compatible */
+    #contact {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    #contact .contact-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow);
+      transition: all 0.3s ease;
+    }
+
+    #contact .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px var(--card-shadow);
+    }
+
+    #contact .contact-card .icon-wrapper {
+      background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    #contact .contact-card i {
+      color: white !important;
+    }
+
+    #contact .contact-card h3 {
+      color: var(--text-primary);
+    }
+
+    #contact .contact-card p {
+      color: var(--text-secondary);
+    }
+
+    #contact .main-contact-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow);
+      color: var(--text-primary);
+    }
+
+    #contact .main-contact-card p {
+      color: var(--text-secondary);
+    }
+
+    /* Particles background */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(102, 126, 234, 0.3);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Mobile Menu styles - dark mode compatible */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      z-index: 60;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 6rem;
+      transition: transform 0.3s ease-out;
+      transform: translateX(100%);
+    }
+
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+
+    .mobile-menu a {
+      color: var(--text-primary);
+    }
+
+    /* Hero section background - theme aware */
+    #hero {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-tertiary) 100%);
+    }
+
+    /* Skills section background - theme aware */
+    #skills {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    }
+
+    /* Experience section background - theme aware */
+    #experience {
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+    }
+
+    /* Projects section background - theme aware */
+    #projects {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    }
+
+    /* subtitle - dark mode compatible */
+    .professional-subtitle {
+      color: var(--text-secondary);
+    }
+
+    /* Description text - dark mode compatible */
+    .description-text {
+      color: var(--text-secondary);
+    }
+
+    /* Accessibility: Focus states */
+    a:focus,
+    button:focus {
+      outline: 2px solid var(--accent-teal);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .card-hover:hover {
+        transform: translateY(-6px);
+      }
+
+      .project-card:hover {
+        transform: translateY(-8px);
+      }
+
+      .mobile-menu {
+        display: flex;
+      }
+    }
+
+    /* Smooth morphing gradient */
+    .morphing-gradient {
+      background: linear-gradient(-45deg, #667eea, #764ba2, #14b8a6, #f093fb);
+      background-size: 400% 400%;
+      animation: gradient-morph 8s ease infinite;
+    }
+
+    @keyframes gradient-morph {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* 3D skill cards - dark mode compatible */
+    .skill-card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+      perspective: 1000px;
+    }
+
+    .skill-card-3d:hover {
+      transform: rotateY(180deg);
+    }
+
+    .skill-front,
+    .skill-back {
+      backface-visibility: hidden;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border-radius: 16px;
+    }
+
+    .skill-front {
+      color: var(--text-primary);
+    }
+
+    .skill-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    /* Wave animation for sections */
+    .wave-animation {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wave-animation::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+      animation: wave 10s linear infinite;
+    }
+
+    @keyframes wave {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* button styling */
+    .clean-button {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+      border: none;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .clean-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .clean-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .clean-button:hover::before {
+      left: 100%;
+    }
+
+    /* Img effects */
+    .profile-image {
+      transition: all 0.5s ease;
+      filter: contrast(1) brightness(1);
+    }
+
+    .profile-image:hover {
+      transform: scale(1.05);
+      filter: contrast(1.2) brightness(1.1);
+    }
+
+    /* Fade */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .fade-in-delay-1 {
+      animation-delay: 0.2s;
+    }
+
+    .fade-in-delay-2 {
+      animation-delay: 0.4s;
+    }
+
+    .fade-in-delay-3 {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Dark mode button */
+    .theme-toggle {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 10px 20px var(--card-shadow);
+    }
+
+    .theme-toggle i {
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    /* Project card content - dark mode compatible */
+    .project-card h3 {
+      color: var(--text-primary);
+    }
+
+    .project-card p {
+      color: var(--text-secondary);
+    }
+
+    /* Experience card content - dark mode compatible */
+    .experience-card h3 {
+      color: var(--text-primary);
+    }
+
+    .experience-card p {
+      color: var(--text-secondary);
+    }
+
+    .experience-card ul li {
+      color: var(--text-secondary);
+    }
+
+    .video-container {
+      position: relative;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px var(--card-shadow);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .video-container:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 80px var(--card-shadow);
+    }
+
+    .video-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .video-container:hover::before {
+      opacity: 1;
+    }
+
+    .custom-video-player {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      position: relative;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+
+    .video-overlay:hover {
+      background: linear-gradient(135deg, rgba(172, 95, 155, 0.205), rgba(118, 75, 162, 0.226));
+    }
+
+    .video-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .play-button {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .play-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .play-icon {
+      color: var(--primary-purple);
+      width: 32px;
+      height: 32px;
+      margin-left: 4px;
+    }
+
+    .video-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      color: white;
+      z-index: 3;
+    }
+
+    .video-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .morphing-gradient {
+      background: linear-gradient(-45deg, #667eea, #764ba2, #14b8a6, #f093fb);
+      background-size: 400% 400%;
+      animation: gradient-morph 8s ease infinite;
+    }
+
+    @keyframes gradient-morph {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .feature-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px var(--card-shadow);
+    }
+
+    .section-title {
+      color: var(--text-primary);
+    }
+
+    .description-text {
+      color: var(--text-secondary);
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="particles" id="particles"></div>
+
+  <!-- Theme Button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <i data-lucide="moon" id="theme-icon"></i>
+  </button>
+
+  <nav class="fixed top-0 left-0 right-0 glass z-50 border-b border-white/20">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div class="text-2xl font-bold gradient-text">Maryem Risy</div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#about" class="nav-item text-sm font-medium">About</a>
+          <a href="#skills" class="nav-item text-sm font-medium">Skills</a>
+          <a href="#experience" class="nav-item text-sm font-medium">Experience</a>
+          <a href="#projects" class="nav-item text-sm font-medium">Projects</a>
+          <a href="#contact" class="nav-item text-sm font-medium">Contact</a>
+        </div>
+        <button class="md:hidden glass px-3 py-2 rounded-lg relative z-50" id="mobile-menu-btn"
+          aria-label="Open mobile menu">
+          <i data-lucide="menu" class="h-6 w-6"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="mobile-menu-overlay" class="mobile-menu">
+    <button class="absolute top-6 right-6 glass p-2 rounded-lg" id="close-mobile-menu-btn"
+      aria-label="Close mobile menu">
+      <i data-lucide="x" class="h-6 w-6"></i>
+    </button>
+    <div class="flex flex-col items-center space-y-8 text-xl font-semibold">
+      <a href="#about" class="nav-item" data-nav-link>About</a>
+      <a href="#skills" class="nav-item" data-nav-link>Skills</a>
+      <a href="#experience" class="nav-item" data-nav-link>Experience</a>
+      <a href="#projects" class="nav-item" data-nav-link>Projects</a>
+      <a href="#contact" class="nav-item" data-nav-link>Contact</a>
+    </div>
+  </div>
+
+  <section id="hero" class="pt-20 pb-16 px-6 min-h-screen flex items-center wave-animation">
+    <div class="container mx-auto text-center relative z-10">
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <div class="w-56 h-56 mx-auto mb-8 rounded-full overflow-hidden shadow-2xl relative fade-in">
+            <div class="absolute inset-0 morphing-gradient opacity-20"></div>
+            <img src="images/photo2.png" alt="Maryem Risy"
+              class="w-full h-full object-cover relative z-10 profile-image">
+          </div>
+          <h1 class="text-4xl md:text-6xl font-bold mb-6 hero-title fade-in fade-in-delay-1">
+            Maryem Risy
+          </h1>
+          <h2 class="text-2xl md:text-3xl professional-subtitle mb-8 fade-in fade-in-delay-2">
+            Computer Science Engineer | Full-Stack Developer
+          </h2>
+          <p class="text-xl description-text mb-12 max-w-3xl mx-auto leading-relaxed fade-in fade-in-delay-3">
+            Passionate Software Engineer specializing in Information Systems and Decision Support,
+            with expertise in web development, mobile applications, and AI solutions.
+          </p>
+        </div>
+
+        <!-- contact buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in fade-in-delay-3">
+          <a href="mailto:maryem.risy@gmail.com"
+            class="clean-button inline-flex items-center px-6 py-3 rounded-full transition-all transform hover:scale-105">
+            <i data-lucide="mail" class="mr-2 h-5 w-5"></i>
+            maryem.risy@gmail.com
+          </a>
+          <a href="tel:+212605613939"
+            class="clean-button inline-flex items-center px-6 py-3 rounded-full transition-all transform hover:scale-105">
+            <i data-lucide="phone" class="mr-2 h-5 w-5"></i>
+            +212 605613939
+          </a>
+          <a href="https://github.com/Maryem-Risy/" target="_blank"
+            class="clean-button inline-flex items-center px-6 py-3 rounded-full transition-all transform hover:scale-105">
+            <i data-lucide="github" class="mr-2 h-5 w-5"></i>
+            Github
+          </a>
+          <a href="https://www.linkedin.com/in/maryem-risy-6710aa219/" target="_blank"
+            class="clean-button inline-flex items-center px-6 py-3 rounded-full transition-all transform hover:scale-105">
+            <i data-lucide="linkedin" class="mr-2 h-5 w-5"></i>
+            Connect
+          </a>
+
+
+        </div>
+        <!-- Download CV Button -->
+        <div class="flex justify-center mt-8 fade-in fade-in-delay-3">
+          <a href="cv/Maryem_Risy_CV.pdf" download="Maryem_Risy_CV.pdf"
+            class="bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white font-bold px-8 py-4 rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center">
+            <i data-lucide="download" class="mr-3 h-6 w-6"></i>
+            My resume
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Vid -->
+  <section id="about-video" class="py-10 px-5">
+    <div class="container mx-auto">
+      <div class="max-w-2xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-16 fade-in">
+          <h2 class="text-4xl md:text-5xl font-bold mb-4 section-title">Get to Know Me</h2>
+          <div class="w-24 h-1 morphing-gradient mx-auto mb-8 rounded-full"></div>
+          <p class="text-xl description-text max-w-2xl mx-auto">
+            Watch this short video to learn more about my journey, passion, and approach to software development
+          </p>
+        </div>
+
+        <!-- Video Container -->
+        <div class="video-container fade-in">
+          <div class="custom-video-player">
+            <video id="mainVideo" poster="images/photo7.png">
+              <source src="images/video.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+
+            <!-- Video Overlay with Play Button -->
+            <div class="video-overlay" id="videoOverlay">
+              <div class="play-button">
+                <i data-lucide="play" class="play-icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+  </section>
+
+
+  <section id="skills" class="py-16 px-6">
+    <div class="container mx-auto">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4 section-title">Technical Skills</h2>
+          <div class="w-24 h-1 morphing-gradient mx-auto mb-8 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          <div class="skill-card-3d relative h-32">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="code" class="text-purple-600 w-10 h-10 mb-2"></i>
+              <span class="text-sm font-semibold">Frontend</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-xs font-bold text-center">HTML5, CSS3, JavaScript, Bootstrap</span>
+            </div>
+          </div>
+
+          <div class="skill-card-3d relative h-32">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="layers" class="text-blue-600 w-10 h-10 mb-2"></i>
+              <span class="text-sm font-semibold">Backend</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-xs font-bold text-center">PHP, Java, Python, Flutter</span>
+            </div>
+          </div>
+
+          <div class="skill-card-3d relative h-32">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="brain" class="text-pink-600 w-10 h-10 mb-2"></i>
+              <span class="text-sm font-semibold">AI & ML</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-xs font-bold text-center">Google ML Kit</span>
+            </div>
+          </div>
+
+          <div class="skill-card-3d relative h-32">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="database" class="text-orange-600 w-10 h-10 mb-2"></i>
+              <span class="text-sm font-semibold">Databases</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-xs font-bold text-center">SQL, PL/SQL, MongoDB, PostgreSQL</span>
+            </div>
+          </div>
+
+          <div class="skill-card-3d relative h-32">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="git-branch" class="text-gray-800 w-10 h-10 mb-2"></i>
+              <span class="text-sm font-semibold">Dev Tools</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-xs font-bold text-center">Git/GitHub</span>
+            </div>
+          </div>
+
+          <div class="skill-card-3d relative h-32">
+            <div class="skill-front glass rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <i data-lucide="boxes" class="text-yellow-600 w-10 h-10 mb-2"></i>
+              <span class="text-sm font-semibold">Frameworks</span>
+            </div>
+            <div class="skill-back rounded-2xl p-6 flex flex-col items-center justify-center h-full">
+              <span class="text-xs font-bold text-center">Laravel, Django, Angular , React</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Soft Skills Section -->
+        <div class="text-center mb-16 mt-16">
+          <h2 class="text-4xl font-bold mb-4 section-title">Soft Skills</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="users" class="text-purple-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg enhanced-text">Teamwork</h4>
+          </div>
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="check-circle" class="text-blue-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg enhanced-text">Discipline</h4>
+          </div>
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="user" class="text-green-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg enhanced-text">Autonomy</h4>
+          </div>
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="refresh-cw" class="text-orange-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg enhanced-text">Adaptability</h4>
+          </div>
+        </div>
+
+        <!-- Languages Section -->
+        <div class="text-center mb-16 mt-16">
+          <h2 class="text-4xl font-bold mb-4 section-title">Languages</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="message-square" class="text-purple-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg">French: Proficient</h4>
+          </div>
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="message-square" class="text-blue-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg">English: Proficient</h4>
+          </div>
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="message-square" class="text-green-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg">Arabic: Native</h4>
+          </div>
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="message-square" class="text-orange-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg">Spanish: Basic</h4>
+          </div>
+        </div>
+
+        <!-- Certifications Section -->
+        <div class="text-center mb-16 mt-16">
+          <h2 class="text-4xl font-bold mb-4 section-title">Certifications</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="award" class="text-purple-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg">Oracle PL/SQL Certification</h4>
+          </div>
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="award" class="text-blue-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg">Relational Database Implementation</h4>
+          </div>
+          <div class="text-center p-6 glass rounded-2xl card-hover">
+            <div class="skill-icon mb-3">
+              <i data-lucide="award" class="text-green-600 w-10 h-10"></i>
+            </div>
+            <h4 class="font-semibold text-lg">Algorithm Functionality</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="py-16 px-6 bg-gradient-to-br from-purple-50 to-blue-50">
+    <div class="container mx-auto">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4 section-title">Professional Experience</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+          <p class="text-xl description-text max-w-2xl mx-auto">
+            Hands-on experience in developing innovative software solutions
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div class="glass p-8 rounded-2xl card-hover">
+            <h3 class="text-2xl font-bold mb-3">End of Studies Internship (PFE)</h3>
+            <p class="text-lg font-medium enhanced-text mb-2">University Hospital Center (CHU) of Tangier</p>
+            <p class="description-text mb-4">February 2025 - August 2025</p>
+            <ul class="mb-6 text-lg">
+              <li>Development of a digital solution for the MPR service allowing patients to follow articulation
+                exercises at home via mobile application with movement analysis, and doctors to monitor progress via web
+                interface.</li>
+            </ul>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Django</span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PostgreSQL</span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Flutter</span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Google
+                ML Kit</span>
+            </div>
+          </div>
+
+          <div class="glass p-8 rounded-2xl card-hover">
+            <h3 class="text-2xl font-bold mb-3">Development Internship (PFA)</h3>
+            <p class="text-lg font-medium enhanced-text mb-2">National School of Applied Sciences of Tetouan</p>
+            <p class="description-text mb-4">August 2024 - October 2024</p>
+            <ul class="mb-6 text-lg">
+              <li>Design and development of an exam management application with a user-friendly interface, integrating
+                planning, monitoring, and user authentication functionalities.</li>
+            </ul>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Laravel
+                11</span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PHP</span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Bootstrap</span>
+              <span
+                class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">JavaScript</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="py-16 px-6">
+    <div class="container mx-auto">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4 section-title">Featured Projects</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+          <p class="text-xl description-text max-w-2xl mx-auto">
+            Innovative solutions that showcase technical expertise and creative problem-solving
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <a href="https://www.linkedin.com/posts/maryem-risy_projet-maroc-digital-2030-activity-7284286199240749056-3Gsm?utm_source=share&utm_medium=member_desktop&rcm=ACoAADcCQTUBTI4EfnevyZelgRNbSgxu94_KEqk" class="project-card rounded-3xl overflow-hidden block group">
+            <div class="relative h-56 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&h=300&fit=crop"
+                alt="Administrative Document Management System" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <div class="glass p-2 rounded-lg bg-purple-600/20 transition-transform group-hover:scale-110">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3">
+                Administrative Document Management System
+              </h3>
+              <p class="mb-6 text-lg">Part of Morocco Digital 2030 vision - comprehensive document
+                management solution. Academic project realized within the framework of the Information Systems
+                Urbanization module, aiming to modernize public services in Morocco.</p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Laravel</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">MySQL</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">BPMN</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Proxmox</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://drive.google.com/file/d/1IXCq81kSxYtfYY0PB0GzPlKs-bNbO_Nv/view" target="_blank" rel="noopener noreferrer"
+            class="project-card rounded-3xl overflow-hidden block group">
+            <div class="relative h-56 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=300&fit=crop"
+                alt="Medication Reminder Mobile App" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <div class="glass p-3 rounded-lg bg-purple-600/20 transition-transform group-hover:scale-110">
+                  <i data-lucide="external-link" class="text-white h-6 w-6"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3">
+                Medication Reminder Mobile App
+              </h3>
+              <p class="mb-6 text-lg">Smart mobile application with user management and personalized
+                filtering system. The application allows users to create, consult, and delete reminders associated with
+                medications.</p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Android</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Java/Kotlin</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">SQLite</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/Maryem-Risy/" target="_blank" rel="noopener noreferrer"
+            class="project-card rounded-3xl overflow-hidden block group">
+            <div class="relative h-56 overflow-hidden">
+              <img src="images/pfa.png" alt="Digital Assessment Administration Platform">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <div class="glass p-3 rounded-lg bg-purple-600/20 transition-transform group-hover:scale-110">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3">
+                Digital Assessment Administration Platform
+              </h3>
+              <p class="mb-6 text-lg">Design and development of an exam management application with a
+                user-friendly interface, integrating planning, monitoring, and user authentication functionalities.</p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Laravel
+                  11</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PHP</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Bootstrap</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">JavaScript</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="#" class="project-card rounded-3xl overflow-hidden block group">
+            <div class="relative h-56 overflow-hidden">
+              <img src="images/mpr.jpg" alt="Smart Rehabilitation Monitoring Solution"
+                class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <div class="glass p-2 rounded-lg bg-purple-600/20 transition-transform group-hover:scale-110">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3">
+                Smart Rehabilitation Monitoring Solution
+              </h3>
+              <p class="mb-6 text-lg">Development of a digital solution for the MPR service allowing
+                patients to follow articulation exercises at home via mobile application with movement analysis, and
+                doctors to monitor progress via web interface.</p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Django</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">PostgreSQL</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Flutter</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Google
+                  ML Kit</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/gir-yay/Projet-Web-2" target="_blank" rel="noopener noreferrer"
+            class="project-card rounded-3xl overflow-hidden block group">
+            <div class="relative h-56 overflow-hidden">
+              <img src="images/kounhany.png" alt="Home Services Booking Web Application"
+                class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <div class="glass p-2 rounded-lg bg-purple-600/20 transition-transform group-hover:scale-110">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3">
+                Home Services Booking Web Application
+              </h3>
+              <p class="mb-6 text-lg">A web application in Laravel to facilitate the search and booking of
+                home services such as babysitting and household maintenance.</p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Laravel</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">HTML/CSS</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">JavaScript</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/gir-yay/BDD" target="_blank" rel="noopener noreferrer"
+            class="project-card rounded-3xl overflow-hidden block group">
+            <div class="relative h-56 overflow-hidden">
+              <img src="images/cars_projects.png" alt="Car Rental Management Web Application"
+                class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 right-4">
+                <div class="glass p-2 rounded-lg bg-purple-600/20 transition-transform group-hover:scale-110">
+                  <i data-lucide="external-link" class="text-white h-5 w-5"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3">
+                Car Rental Management Web Application
+              </h3>
+              <p class="mb-6 text-lg">Development of a car rental management system allowing efficient
+                management of reservations, vehicles, clients, and managers.</p>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">Django</span>
+                <span
+                  class="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-800 rounded-full text-sm">MongoDB</span>
+              </div>
+            </div>
+          </a>
+  </section>
+
+  <section id="contact" class="py-16 px-6">
+    <div class="container mx-auto relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 section-title">Let's Work Together</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full"></div>
+        <p class="description-text mb-12 text-xl max-w-2xl mx-auto">
+          Ready to bring your next project to life? Let's discuss how we can create amazing software solutions together.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="contact-card p-8 rounded-2xl text-center">
+            <div class="icon-wrapper">
+              <i data-lucide="mail" class="w-7 h-7"></i>
+            </div>
+            <h3 class="font-semibold mb-2 text-lg">Email</h3>
+            <p>maryem.risy@gmail.com</p>
+          </div>
+
+          <div class="contact-card p-8 rounded-2xl text-center">
+            <div class="icon-wrapper">
+              <i data-lucide="phone" class="w-7 h-7"></i>
+            </div>
+            <h3 class="font-semibold mb-2 text-lg">Phone</h3>
+            <p>+212 605613939</p>
+          </div>
+
+          <div class="contact-card p-8 rounded-2xl text-center">
+            <div class="icon-wrapper">
+              <i data-lucide="map-pin" class="w-7 h-7"></i>
+            </div>
+            <h3 class="font-semibold mb-2 text-lg">Location</h3>
+            <p>Casablanca, Morocco</p>
+          </div>
+        </div>
+
+        <div class="rounded-3xl p-12 max-w-2xl mx-auto main-contact-card">
+          <div class="flex items-center justify-center mb-6">
+            <i data-lucide="message-square" class="mr-3 text-purple-600 w-7 h-7"></i>
+            <h3 class="text-2xl font-semibold">Get In Touch</h3>
+          </div>
+          <p class="mb-8 text-lg">
+            Whether you have a project in mind, need technical consultation, or just want to connect,
+            I'm always open to discussing new opportunities and innovative solutions.
+          </p>
+          <a href="mailto:maryem.risy@gmail.com"
+            class="clean-button inline-flex items-center px-8 py-4 rounded-full text-lg font-semibold"
+            aria-label="Send Message via Email">
+            <i data-lucide="mail" class="mr-3 h-5 w-5"></i>
+            Send Message
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Theme management
+    function initTheme() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const body = document.body;
+
+      // Check default to 'light' mode
+      const currentTheme = localStorage.getItem('theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+      // Apply the theme
+      if (currentTheme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        themeIcon.setAttribute('data-lucide', 'sun');
+      } else {
+        body.removeAttribute('data-theme');
+        themeIcon.setAttribute('data-lucide', 'moon');
+      }
+
+      // Re-initialize icons after change
+      lucide.createIcons();
+
+      // Theme toggle functionality
+      themeToggle?.addEventListener('click', () => {
+        const isDark = body.hasAttribute('data-theme');
+
+        if (isDark) {
+          body.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
+          themeIcon.setAttribute('data-lucide', 'moon');
+        } else {
+          body.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+          themeIcon.setAttribute('data-lucide', 'sun');
+        }
+
+        // Re-initialize icons change
+        lucide.createIcons();
+      });
+    }
+    lucide.createIcons();
+
+    // Video player functionality
+    const video = document.getElementById('mainVideo');
+    const overlay = document.getElementById('videoOverlay');
+
+    overlay.addEventListener('click', () => {
+      video.play();
+      overlay.classList.add('hidden');
+    });
+
+    video.addEventListener('click', () => {
+      if (video.paused) {
+        video.play();
+        overlay.classList.add('hidden');
+      } else {
+        video.pause();
+        overlay.classList.remove('hidden');
+      }
+    });
+
+    video.addEventListener('ended', () => {
+      overlay.classList.remove('hidden');
+    });
+
+    // Theme toggle (if you want to add it)
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        document.body.toggleAttribute('data-theme', 'dark');
+      });
+    }
+
+    // floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      createParticles();
+
+      //  elts for animation
+      document.querySelectorAll('.card-hover, .project-card, .contact-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(el);
+      });
+
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const closeMobileMenuBtn = document.getElementById('close-mobile-menu-btn');
+      const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+      const navLinks = document.querySelectorAll('#mobile-menu-overlay [data-nav-link]');
+
+      mobileMenuBtn?.addEventListener('click', () => {
+        mobileMenuOverlay.classList.add('active');
+      });
+
+      closeMobileMenuBtn?.addEventListener('click', () => {
+        mobileMenuOverlay.classList.remove('active');
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuOverlay.classList.remove('active');
+        });
+      });
+
+      // Smooth scrolling for links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Initialize icons
+      lucide.createIcons();
+    });
+  </script>
+</body>
+
+</html>
