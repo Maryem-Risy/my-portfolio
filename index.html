@@ -477,52 +477,75 @@
       max-width: 480px;
     }
 
-    /* ─── VIDEO SECTION ─── */
-    #about-video {
+    /* ─── ABOUT STORY SECTION ─── */
+    #about-story {
       padding: 5rem 2rem;
     }
 
-    .video-wrap {
-      max-width: 720px;
-      margin: 0 auto;
+    .about-story-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 3rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 800px) {
+      .about-story-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .about-story-photo {
+      position: relative;
       border-radius: var(--radius-lg);
       overflow: hidden;
       border: 1px solid var(--border);
-      position: relative;
       background: var(--bg-1);
+      aspect-ratio: 4 / 5;
     }
 
-    .video-wrap video {
+    .about-story-photo img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
-    .video-overlay-btn {
+    .about-story-photo::after {
+      content: '';
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(8,11,16,0.55);
-      cursor: pointer;
-      transition: background 0.3s;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      pointer-events: none;
     }
 
-    .video-overlay-btn.hidden { opacity: 0; pointer-events: none; }
-
-    .play-circle {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s;
+    .about-story-text {
+      color: var(--text-2);
+      font-size: 1.02rem;
+      line-height: 1.75;
+      margin-bottom: 1.75rem;
     }
 
-    .video-overlay-btn:hover .play-circle { transform: scale(1.12); }
+    .about-story-text strong {
+      color: var(--text-1);
+      font-weight: 600;
+    }
 
-    .play-circle svg { color: #080b10; margin-left: 4px; }
+    .about-story-quote {
+      border-left: 2px solid var(--gold);
+      padding: 0.25rem 0 0.25rem 1.25rem;
+      margin: 0 0 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text-1);
+      line-height: 1.5;
+    }
+
+
 
     /* ─── SKILLS ─── */
     #skills { padding: 5rem 2rem; background: var(--bg-1); }
@@ -1113,7 +1136,7 @@
   <nav>
     <a href="#hero" class="nav-logo">MR.</a>
     <ul class="nav-links">
-      <li><a href="#about-video">About</a></li>
+      <li><a href="#about-story">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -1134,7 +1157,7 @@
     <button class="mobile-nav-close" id="mobile-nav-close">
       <i data-lucide="x"></i>
     </button>
-    <a href="#about-video" data-mobile-link>About</a>
+    <a href="#about-story" data-mobile-link>About</a>
     <a href="#skills" data-mobile-link>Skills</a>
     <a href="#experience" data-mobile-link>Experience</a>
     <a href="#projects" data-mobile-link>Projects</a>
@@ -1201,22 +1224,34 @@
     </div>
   </section>
 
-  <!-- VIDEO / ABOUT -->
-  <section id="about-video">
+  <!-- ABOUT STORY -->
+  <section id="about-story">
     <div class="container">
       <div class="section-header reveal">
         <div class="section-label">Get to know me</div>
         <h2 class="section-title">My Story</h2>
-        <p class="section-sub">A short video about my journey, passion, and approach to software & data engineering.</p>
+        <p class="section-sub">A bit about who I am, what drives me, and how I approach software & data engineering.</p>
       </div>
-      <div class="video-wrap reveal">
-        <video id="mainVideo" poster="images/photo7.png">
-          <source src="images/video.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay-btn" id="videoOverlay">
-          <div class="play-circle">
-            <i data-lucide="play" style="width:28px;height:28px;"></i>
-          </div>
+      <div class="about-story-grid reveal">
+        <div class="about-story-photo">
+          <img src="images/photo7.png" alt="Maryem Risy">
+        </div>
+        <div class="about-story-content">
+          <p class="about-story-text">
+            I'm <strong>Maryem</strong>, a full-stack & data engineer based in Casablanca, Morocco.
+            I graduated from ENSA Tétouan with an engineering degree in Computer Science (Decision Systems),
+            and I've spent the past two years building things at the intersection of <strong>software development</strong>
+            and <strong>data</strong> — from a mobile app that helps hospital patients track rehab exercises,
+            to dashboards that turn raw numbers into decisions people can actually act on.
+          </p>
+          <p class="about-story-text">
+            What I enjoy most is the full journey of a project: understanding a real problem, designing a clean
+            solution, and following through until it's something people genuinely use — whether that's doctors,
+            students, or a business team staring at a report.
+          </p>
+          <blockquote class="about-story-quote">
+            "I care less about the tool, and more about the problem it solves."
+          </blockquote>
         </div>
       </div>
     </div>
@@ -1586,15 +1621,15 @@
     });
 
     // Video
-    const video = document.getElementById('mainVideo');
-    const overlay = document.getElementById('videoOverlay');
+    // const video = document.getElementById('mainVideo');
+    // const overlay = document.getElementById('videoOverlay');
 
-    overlay.addEventListener('click', () => { video.play(); overlay.classList.add('hidden'); });
-    video.addEventListener('click', () => {
-      if (video.paused) { video.play(); overlay.classList.add('hidden'); }
-      else { video.pause(); overlay.classList.remove('hidden'); }
-    });
-    video.addEventListener('ended', () => overlay.classList.remove('hidden'));
+    // overlay.addEventListener('click', () => { video.play(); overlay.classList.add('hidden'); });
+    // video.addEventListener('click', () => {
+    //   if (video.paused) { video.play(); overlay.classList.add('hidden'); }
+    //   else { video.pause(); overlay.classList.remove('hidden'); }
+    // });
+    // video.addEventListener('ended', () => overlay.classList.remove('hidden'));
 
     // Skill tabs
     document.querySelectorAll('.tab-btn').forEach(btn => {
